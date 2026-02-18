@@ -28,6 +28,8 @@ describe('SidebarContent', () => {
     pushMock.mockClear();
   });
 
+  const user = userEvent.setup();
+
   describe('base', () => {
     it("should render the sidebar and the 'Nova Sessão' button", () => {
       // Given
@@ -41,6 +43,7 @@ describe('SidebarContent', () => {
     });
 
     it('should list sessions', () => {
+      // Given
       const sessionsListMock = [
         {
           id: '1',
@@ -56,10 +59,24 @@ describe('SidebarContent', () => {
 
       renderSut({ sessions: sessionsListMock });
 
+      // Then
       expect(screen.getByText(sessionsListMock[0].title)).toBeInTheDocument();
       expect(screen.getAllByRole('paragraph')).toHaveLength(
         sessionsListMock.length
       );
+    });
+
+    it('should update search input when typing', async () => {
+      // Given
+      const text = 'Hey';
+      renderSut();
+      const searchInput = screen.getByPlaceholderText('Buscar sessões...');
+
+      // When
+      await user.type(searchInput, text);
+
+      // Then
+      expect(searchInput).toHaveValue(text);
     });
   });
 
@@ -82,7 +99,6 @@ describe('SidebarContent', () => {
 
     it('should collapse the sidebar and show the expand button', async () => {
       // Given
-      const user = userEvent.setup();
       renderSut();
 
       // When

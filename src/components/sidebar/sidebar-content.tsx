@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Logo } from '../logo';
 import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 interface ISession {
   title: string;
   id: string;
@@ -82,6 +83,17 @@ export const SidebarContent = ({ sessions }: SidebarContentProps) => {
                 </Button>
               </header>
             </div>
+
+            <section className="mb-5">
+              <form action="">
+                <Input
+                  name="q"
+                  type="text"
+                  placeholder="Buscar sessões..."
+                  autoFocus
+                />
+              </form>
+            </section>
 
             <div>
               <Button className="w-full " size="lg" onClick={handleNewSession}>
