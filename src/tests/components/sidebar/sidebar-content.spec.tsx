@@ -2,8 +2,10 @@ import { SidebarContent } from '@/components/sidebar/sidebar-content';
 import { render, screen } from '@/lib/test-utils';
 import userEvent from '@testing-library/user-event';
 
+const pushMock = jest.fn();
+
 jest.mock('next/navigation', () => ({
-  useRouter: () => ({ push: jest.fn() }),
+  useRouter: () => ({ push: pushMock }),
 }));
 
 const makeSut = () => {
@@ -20,7 +22,7 @@ describe('SidebarContent', () => {
     expect(screen.getByRole('button', { name: 'Nova Sessão' })).toBeVisible();
   });
 
-  describe('Sidebar Collapsed', () => {
+  describe('Collapse / Expand', () => {
     it('=> Should start collapsed and show  minimize button', () => {
       makeSut();
 
@@ -54,6 +56,20 @@ describe('SidebarContent', () => {
 
       expect(expandButton).toBeInTheDocument();
       expect(collapseButton).not.toBeInTheDocument();
+    });
+  });
+
+  describe('New Session', () => {
+    it('=> Should navigate to page new session /new', async () => {
+      makeSut();
+
+      const newSessionButton = screen.getByRole('button', {
+        name: 'Nova Sessão',
+      });
+
+      await user.click(newSessionButton);
+
+      expect(pushMock).toHaveBeenCalledWith('/new');
     });
   });
 });
