@@ -8,67 +8,70 @@ jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
 }));
 
-const makeSut = () => {
-  return render(<SidebarContent />);
-};
+const renderSut = () => render(<SidebarContent />);
 
 describe('SidebarContent', () => {
-  const user = userEvent.setup();
+  beforeEach(() => {
+    pushMock.mockClear();
+  });
 
-  it('=> Should render button to create new session', () => {
-    makeSut();
+  it("should render the sidebar and the 'Nova Sessão' button", () => {
+    // Given
+    renderSut();
 
+    // Then
     expect(screen.getByRole('complementary')).toBeVisible();
-    expect(screen.getByRole('button', { name: 'Nova Sessão' })).toBeVisible();
+    expect(screen.getByRole('button', { name: /nova sessão/i })).toBeVisible();
   });
 
-  describe('Collapse / Expand', () => {
-    it('=> Should start collapsed and show  minimize button', () => {
-      makeSut();
+  describe('Collapse and expand', () => {
+    it('should start expanded and show the minimize button', () => {
+      // Given
+      renderSut();
 
-      const aside = screen.getByRole('complementary');
-      expect(aside).toBeVisible();
+      // Then
+      expect(screen.getByRole('complementary')).toBeVisible();
 
-      const collapseButton = screen.getByRole('button', {
-        name: /minimizar sidebar/i,
-      });
-      expect(collapseButton).toBeVisible();
+      expect(
+        screen.getByRole('button', { name: /minimizar sidebar/i })
+      ).toBeVisible();
 
-      const expandButton = screen.queryByRole('button', {
-        name: /expandir sidebar/i,
-      });
-      expect(expandButton).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /expandir sidebar/i })
+      ).not.toBeInTheDocument();
     });
 
-    it('=> Should collapse and show expand button', async () => {
-      makeSut();
+    it('should collapse the sidebar and show the expand button', async () => {
+      // Given
+      const user = userEvent.setup();
+      renderSut();
 
-      const collapseButton = screen.getByRole('button', {
-        name: /minimizar sidebar/i,
-      });
-      expect(collapseButton).toBeVisible();
+      // When
+      await user.click(
+        screen.getByRole('button', { name: /minimizar sidebar/i })
+      );
 
-      await user.click(collapseButton);
+      // Then
+      expect(
+        screen.getByRole('button', { name: /expandir sidebar/i })
+      ).toBeVisible();
 
-      const expandButton = screen.queryByRole('button', {
-        name: /expandir sidebar/i,
-      });
-
-      expect(expandButton).toBeInTheDocument();
-      expect(collapseButton).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /minimizar sidebar/i })
+      ).not.toBeInTheDocument();
     });
   });
 
-  describe('New Session', () => {
-    it('=> Should navigate to page new session /new', async () => {
-      makeSut();
+  describe('New session navigation', () => {
+    it("should navigate to /new when the user clicks on 'Nova Sessão'", async () => {
+      // Given
+      const user = userEvent.setup();
+      renderSut();
 
-      const newSessionButton = screen.getByRole('button', {
-        name: 'Nova Sessão',
-      });
+      // When
+      await user.click(screen.getByRole('button', { name: /nova sessão/i }));
 
-      await user.click(newSessionButton);
-
+      // Then
       expect(pushMock).toHaveBeenCalledWith('/new');
     });
   });
