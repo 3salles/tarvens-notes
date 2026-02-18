@@ -6,9 +6,11 @@ import { render, screen } from '@/lib/test-utils';
 import userEvent from '@testing-library/user-event';
 
 const pushMock = jest.fn();
+let mockSearchParams = new URLSearchParams();
 
 jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
+  useSearchParams: () => mockSearchParams,
 }));
 
 const sessionsMock = [
@@ -153,5 +155,17 @@ describe('SidebarContent', () => {
       const lastClearCall = pushMock.mock.calls.at(-1);
       expect(lastClearCall?.[0]).toBe('/');
     });
+  });
+
+  it('should start search input with param', () => {
+    //Given
+    const text = 'inicial';
+    const searchParams = new URLSearchParams(`q=${text}`);
+    mockSearchParams = searchParams;
+    renderSut();
+    const searchInput = screen.getByPlaceholderText('Buscar sessões...');
+
+    //Then
+    expect(searchInput).toHaveValue(text);
   });
 });
