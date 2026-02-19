@@ -1,5 +1,6 @@
 'use client';
 
+import { searchSessionAction } from '@/app/actions/session.actions';
 import { ISessionSummary } from '@/core/domain/sessions/session.entity';
 import {
   Plus as AddIcon,
@@ -8,11 +9,18 @@ import {
   X as CloseButton,
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ChangeEvent, startTransition, useState } from 'react';
+import {
+  ChangeEvent,
+  startTransition,
+  useActionState,
+  useRef,
+  useState,
+} from 'react';
 import { Logo } from '../logo';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { SessionList } from '../ui/session';
+import { Spinner } from '../ui/spinner';
 
 export interface SidebarContentProps {
   sessions: ISessionSummary[];
@@ -22,8 +30,18 @@ export const SidebarContent = ({ sessions }: SidebarContentProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const [searchState, searchAction, isPending] = useActionState(
+    searchSessionAction,
+    { success: true, sessions }
+  );
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [query, setQuery] = useState(searchParams.get('q') ?? '');
+
+  const hasQuery = query.trim().length > 0;
+  const sessionList = hasQuery ? (searchState.sessions ?? sessions) : sessions;
 
   const toggleSidebar = () => setIsCollapsed((prev) => !prev);
   const handleNewSession = () => router.push('/new');
@@ -36,6 +54,7 @@ export const SidebarContent = ({ sessions }: SidebarContentProps) => {
       const url = newQuery ? `/?q=${encodeURIComponent(newQuery)}` : '/';
 
       router.push(url, { scroll: false });
+      formRef.current?.requestSubmit();
     });
   };
 
@@ -104,7 +123,11 @@ export const SidebarContent = ({ sessions }: SidebarContentProps) => {
             </div>
 
             <section className="mb-5">
-              <form action="">
+              <form
+                ref={formRef}
+                action={searchAction}
+                className="relative group w-full"
+              >
                 <Input
                   name="q"
                   type="text"
@@ -113,6 +136,17 @@ export const SidebarContent = ({ sessions }: SidebarContentProps) => {
                   onChange={handleQueryChange}
                   value={query}
                 />
+
+                {isPending && (
+                  <div
+                    title="Carregando sessões"
+                    aria-label="Carregando sessões"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 flex 
+                items-center gap-2 text-gray-300"
+                  >
+                    <Spinner />
+                  </div>
+                )}
               </form>
             </section>
 
@@ -128,7 +162,7 @@ export const SidebarContent = ({ sessions }: SidebarContentProps) => {
             className="flex-1 overflow-auto px-6 pb-6"
             aria-label="Lista de sessões"
           >
-            <SessionList sessions={sessions} />
+            <SessionList sessions={sessionList} />
           </nav>
         </>
       )}
