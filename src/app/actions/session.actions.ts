@@ -1,6 +1,8 @@
 'use server';
 
+import { SearchSessionUseCase } from '@/core/application/session/search-session.use-case';
 import { ISessionSummary } from '@/core/domain/sessions/session.entity';
+import { PrismaSessionRepository } from '@/infra/respository/prisma-session.repository';
 import { prisma } from '@/lib/prisma';
 
 type SearchFromState = {
@@ -15,20 +17,11 @@ export async function searchSessionAction(
 ): Promise<SearchFromState> {
   const term = String(formData.get('q') ?? '').trim();
 
+  const sessionRepository = new PrismaSessionRepository(prisma);
+  const sessionUseCase = new SearchSessionUseCase(sessionRepository);
+
   try {
-    const sessions = await prisma.session.findMany({
-      where: term
-        ? {
-            OR: [
-              {
-                title: { contains: term, mode: 'insensitive' },
-              },
-              { note: { contains: term, mode: 'insensitive' } },
-            ],
-          }
-        : undefined,
-      orderBy: { createdAt: 'desc' },
-    });
+    const sessions = await sessionUseCase.execute(term);
 
     const summaries = sessions.map(({ id, title, note }) => ({
       id,
