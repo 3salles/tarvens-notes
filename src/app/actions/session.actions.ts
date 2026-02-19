@@ -1,9 +1,10 @@
 'use server';
 
+import { prisma } from '@/lib/prisma';
+
 import { SearchSessionUseCase } from '@/core/application/session/search-session.use-case';
 import { ISessionSummary } from '@/core/domain/sessions/session.entity';
-import { PrismaSessionRepository } from '@/infra/respository/prisma-session.repository';
-import { prisma } from '@/lib/prisma';
+import { PrismaSessionRepository } from '@/infra/repository/prisma-session.repository';
 
 type SearchFromState = {
   success: boolean;
