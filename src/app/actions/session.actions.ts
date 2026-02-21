@@ -73,6 +73,6 @@ export async function createSessionAction(data: CreateSessionDTO) {
 
   return {
     success: true,
-    message: 'Sessão criada com sucesso',
+    message: 'Sessão criada com sucesso!',
   };
 }

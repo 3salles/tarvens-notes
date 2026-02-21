@@ -1,16 +1,15 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
+import { createSessionAction } from '@/app/actions/session.actions';
 import {
   CreateSessionDTO,
   CreateSessionSchema,
 } from '@/core/application/session/create-session.dto';
-
-import { createSessionAction } from '@/app/actions/session.actions';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';

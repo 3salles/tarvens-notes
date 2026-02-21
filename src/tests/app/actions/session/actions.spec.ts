@@ -120,7 +120,7 @@ describe('Server Actions: Sessions', () => {
       const result = await createSessionAction(data);
 
       expect(result?.success).toBe(true);
-      expect(result?.message).toBe('Sessão criada com sucesso');
+      expect(result?.message).toBe('Sessão criada com sucesso!');
     });
 
     it('should return error when creation fails', async () => {
