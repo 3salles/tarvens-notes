@@ -7,7 +7,6 @@ import { CreateSessionUseCase } from '@/core/application/session/create-session.
 import { SearchSessionUseCase } from '@/core/application/session/search-session.use-case';
 import { ISessionSummary } from '@/core/domain/sessions/session.entity';
 import { PrismaSessionRepository } from '@/infra/repository/prisma-session.repository';
-import { revalidatePath } from 'next/cache';
 import {
   CreateSessionDTO,
   CreateSessionSchema,
@@ -68,7 +67,6 @@ export async function createSessionAction(data: CreateSessionDTO) {
     const useCase = new CreateSessionUseCase(repository);
 
     await useCase.execute(validated.data);
-    revalidatePath('/', 'layout');
   } catch {
     return { success: false, message: 'Falha ao criar sessão' };
   }

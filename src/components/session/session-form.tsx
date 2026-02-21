@@ -10,6 +10,7 @@ import {
 
 import { createSessionAction } from '@/app/actions/session.actions';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
@@ -29,9 +30,11 @@ export const SessionForm = () => {
     const result = await createSessionAction(data);
 
     if (!result.success) {
+      toast.error(result.message);
       return;
     }
 
+    toast.success(result.message);
     router.refresh();
   };
 
