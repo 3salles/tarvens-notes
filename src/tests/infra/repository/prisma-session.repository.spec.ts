@@ -1,8 +1,12 @@
 import { ISession } from '@/core/domain/sessions/session.entity';
 import { PrismaClient } from '@/generated/prisma/client';
 import { PrismaSessionRepository } from '@/infra/repository/prisma-session.repository';
+import { CreateSessionDTO } from './../../../core/application/session/create-session.dto';
 
 interface SessionDelegateMock {
+  create: jest.MockedFunction<
+    (args: { data: CreateSessionDTO }) => Promise<void>
+  >;
   findMany: jest.MockedFunction<
     (args: {
       orderBy?: { createdAt: 'asc' | 'desc' };
@@ -24,6 +28,7 @@ function createMockPrisma() {
   const mock: PrismaMock = {
     session: {
       findMany: jest.fn(),
+      create: jest.fn(),
     },
   };
 
@@ -119,6 +124,20 @@ describe('PrismaSessionRepository', () => {
         orderBy: { createdAt: 'desc' },
       });
       expect(results).toMatchObject(input);
+    });
+  });
+
+  describe('create', () => {
+    it('should call the method with args correctly', async () => {
+      const input = {
+        title: 'Title',
+        note: 'Note',
+        sessionDate: new Date(),
+      };
+
+      await repository.create(input);
+
+      expect(prisma.session.create).toHaveBeenCalledWith({ data: input });
     });
   });
 });
