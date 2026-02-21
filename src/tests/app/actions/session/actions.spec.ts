@@ -1,12 +1,22 @@
-import { searchSessionAction } from '@/app/actions/session.actions';
+import {
+  createSessionAction,
+  searchSessionAction,
+} from '@/app/actions/session.actions';
 
 jest.mock('@/lib/prisma', () => ({ prisma: {} }));
 const mockedSearchExecute = jest.fn();
+const mockedCreateExecute = jest.fn();
 
 jest.mock('@/core/application/session/search-session.use-case', () => ({
   SearchSessionUseCase: jest
     .fn()
     .mockImplementation(() => ({ execute: mockedSearchExecute })),
+}));
+
+jest.mock('@/core/application/session/create-session.use-case', () => ({
+  CreateSessionUseCase: jest
+    .fn()
+    .mockImplementation(() => ({ execute: mockedCreateExecute })),
 }));
 
 describe('Server Actions: Sessions', () => {
@@ -83,6 +93,47 @@ describe('Server Actions: Sessions', () => {
       expect(mockedSearchExecute).toHaveBeenCalledWith('Sessão 01');
       expect(result.success).toBe(true);
       expect(result.sessions).toEqual(input);
+    });
+  });
+
+  describe('createSessionAction', () => {
+    it('should return validation error when fields are empty', async () => {
+      const data = {
+        title: '',
+        note: '',
+      };
+
+      const result = await createSessionAction(data);
+
+      expect(result?.success).toBe(false);
+      expect(result?.message).toBe('Erro de validação');
+      expect(result?.error).toBeDefined();
+    });
+
+    it('should create session with success', async () => {
+      mockedCreateExecute.mockResolvedValue(undefined);
+      const data = {
+        title: 'Sessão 01',
+        note: 'Nota',
+      };
+
+      const result = await createSessionAction(data);
+
+      expect(result?.success).toBe(true);
+      expect(result?.message).toBe('Sessão criada com sucesso');
+    });
+
+    it('should return error when creation fails', async () => {
+      mockedCreateExecute.mockRejectedValue(new Error('UNKNOWN'));
+      const data = {
+        title: 'Sessão 01',
+        note: 'Nota',
+      };
+
+      const result = await createSessionAction(data);
+
+      expect(result?.success).toBe(false);
+      expect(result?.message).toBe('Falha ao criar sessão');
     });
   });
 });

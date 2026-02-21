@@ -2,9 +2,15 @@
 
 import { prisma } from '@/lib/prisma';
 
+import { CreateSessionUseCase } from '@/core/application/session/create-session.use-case';
 import { SearchSessionUseCase } from '@/core/application/session/search-session.use-case';
 import { ISessionSummary } from '@/core/domain/sessions/session.entity';
 import { PrismaSessionRepository } from '@/infra/repository/prisma-session.repository';
+import z from 'zod';
+import {
+  CreateSessionDTO,
+  CreateSessionSchema,
+} from './../../core/application/session/create-session.dto';
 
 type SearchFromState = {
   success: boolean;
@@ -42,4 +48,31 @@ export async function searchSessionAction(
   }
 }
 {
+}
+
+export async function createSessionAction(data: CreateSessionDTO) {
+  const validated = CreateSessionSchema.safeParse(data);
+
+  if (!validated.success) {
+    const { fieldErrors } = z.flattenError(validated.error);
+    return {
+      success: false,
+      message: 'Erro de validação',
+      error: fieldErrors,
+    };
+  }
+
+  try {
+    const repository = new PrismaSessionRepository(prisma);
+    const useCase = new CreateSessionUseCase(repository);
+
+    await useCase.execute(validated.data);
+  } catch {
+    return { success: false, message: 'Falha ao criar sessão' };
+  }
+
+  return {
+    success: true,
+    message: 'Sessão criada com sucesso',
+  };
 }

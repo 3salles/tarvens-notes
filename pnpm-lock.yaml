@@ -42,14 +42,14 @@ importers:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       react-hook-form:
-        specifier: ^7.71.2
+        specifier: ^7.68.0
         version: 7.71.2(react@19.2.3)
       tailwind-merge:
         specifier: ^3.4.1
         version: 3.4.1
       zod:
-        specifier: ^3.25.76
-        version: 3.25.76
+        specifier: ^4.1.13
+        version: 4.3.6
     devDependencies:
       '@faker-js/faker':
         specifier: ^10.3.0

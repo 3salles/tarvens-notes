@@ -1,3 +1,4 @@
+import { CreateSessionDTO } from '@/core/application/session/create-session.dto';
 import { ISession } from '@/core/domain/sessions/session.entity';
 import { SessionRepository } from '@/core/domain/sessions/session.repository';
 import { PrismaClient } from '@/generated/prisma/client';
@@ -30,4 +31,6 @@ export class PrismaSessionRepository implements SessionRepository {
 
     return sessions;
   }
+
+  async create(data: CreateSessionDTO): Promise<void> {}
 }

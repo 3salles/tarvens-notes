@@ -1,6 +1,8 @@
+import { CreateSessionDTO } from '@/core/application/session/create-session.dto';
 import { ISession } from './session.entity';
 
 export interface SessionRepository {
+  create(data: CreateSessionDTO): Promise<void>;
   findMany(): Promise<ISession[]>;
   searchMany(term: string): Promise<ISession[]>;
 }
