@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '../ui/button';
 
-interface CopyButtonProps {
+export interface CopyButtonProps {
   content: string;
 }
 
