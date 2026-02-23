@@ -125,6 +125,29 @@ describe('PrismaSessionRepository', () => {
       });
       expect(results).toMatchObject(input);
     });
+
+    it('should handle undefined term and return all sessions', async () => {
+      const now = new Date();
+      const input = [
+        {
+          id: '1',
+          title: 'Title 01',
+          note: 'Content 01',
+          createdAt: now,
+          updatedAt: now,
+          sessionDate: now,
+        },
+      ];
+      prisma.session.findMany.mockResolvedValue(input);
+
+      const results = await repository.searchMany(undefined);
+
+      expect(prisma.session.findMany).toHaveBeenCalledWith({
+        where: undefined,
+        orderBy: { createdAt: 'desc' },
+      });
+      expect(results).toMatchObject(input);
+    });
   });
 
   describe('create', () => {

@@ -33,9 +33,8 @@ export class PrismaSessionRepository implements SessionRepository {
   }
 
   async create(data: CreateSessionDTO): Promise<void> {
-    //TODO - Adicionar sessionDate quando existir input
     await this.prisma.session.create({
-      data: { ...data, sessionDate: new Date() },
+      data,
     });
   }
 }
