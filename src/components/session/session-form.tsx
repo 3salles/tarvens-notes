@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { createSessionAction } from '@/app/actions/session.actions';
@@ -26,7 +26,7 @@ export const SessionForm = () => {
       note: '',
     },
   });
-  const content = sessionForm.watch('note');
+  const content = useWatch({ control: sessionForm.control, name: 'note' });
 
   const submitSessionForm = async (data: CreateSessionDTO) => {
     const result = await createSessionAction(data);
