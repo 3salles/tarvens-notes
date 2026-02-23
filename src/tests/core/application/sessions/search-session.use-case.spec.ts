@@ -31,7 +31,7 @@ describe('SearchSessionUseCase', () => {
           session.note.toLowerCase().includes(term.toLocaleLowerCase())
       ),
 
-    create: async (data) => {},
+    create: jest.fn(),
   };
 
   it('should return all sessions when term is empty', async () => {
