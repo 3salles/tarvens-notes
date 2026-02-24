@@ -18,22 +18,25 @@ describe('CreateSessionUseCase', () => {
     create: jest.fn(),
   };
 
-  it('should call repository.create with correct data', async () => {
-    const create = jest.fn().mockResolvedValue(undefined);
-    const repositoryWithSpy: SessionRepository = {
-      ...repository,
-      create,
+  const makeRepository = () => {
+    const base = {
+      create: jest.fn(async () => undefined),
     };
 
-    const useCase = new CreateSessionUseCase(repositoryWithSpy);
+    return { ...base } as unknown as SessionRepository;
+  };
 
-    await useCase.execute(input);
+  it('should create a session with correct data', async () => {
+    const repository = makeRepository();
 
-    expect(create).toHaveBeenCalledTimes(1);
-    expect(create).toHaveBeenCalledWith(input);
+    const useCase = new CreateSessionUseCase(repository);
+
+    await expect(useCase.execute(input)).resolves.toBeUndefined();
+
+    expect(repository.create).toHaveBeenCalledWith(input);
   });
 
-  it('should throw if repository.create throws', async () => {
+  it('should throw error if create session fails', async () => {
     const create = jest
       .fn()
       .mockRejectedValueOnce(new Error('Repository error'));
