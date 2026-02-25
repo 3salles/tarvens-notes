@@ -1,7 +1,7 @@
 import { config as dotenvConfig } from 'dotenv';
+import { execSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { seedDatabase } from '../prisma/seed';
 
 async function globalSetup() {
   if (!process.env.CI) {
@@ -20,12 +20,16 @@ async function globalSetup() {
     console.warn('[E2E] Seed ignorado: DATABASE_URL ausente ou inválida.');
     return;
   }
+
   try {
-    await seedDatabase();
+    execSync('npx tsx prisma/seed.ts', {
+      stdio: 'inherit',
+      env: { ...process.env },
+    });
   } catch (error) {
     const _error = error as Error;
     console.warn(
-      `[E2E] Seed do banco de dados falhou,       prosseguindo sem seed. ${_error.message}`
+      `[E2E] Seed do banco de dados falhou, prosseguindo sem seed. ${_error.message}`
     );
   }
 }
