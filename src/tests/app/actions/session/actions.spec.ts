@@ -107,7 +107,7 @@ describe('Server Actions: Sessions', () => {
 
       expect(result?.success).toBe(false);
       expect(result?.message).toBe('Erro de validação');
-      expect(result?.error).toBeDefined();
+      expect(result?.errors).toBeDefined();
     });
 
     it('should create session with success', async () => {
