@@ -44,7 +44,8 @@ export const SidebarContent = ({ sessions }: SidebarContentProps) => {
   const [query, setQuery] = useState(searchParams.get('q') ?? '');
 
   const hasQuery = query.trim().length > 0;
-  const sessionList = hasQuery ? (searchState.sessions ?? sessions) : sessions;
+  const activeSession = hasQuery ? searchState.sessions : undefined;
+  const sessionList = activeSession ?? sessions;
 
   const toggleSidebar = () => setIsCollapsed((prev) => !prev);
   const handleNewSession = () => router.push('/new-session');
