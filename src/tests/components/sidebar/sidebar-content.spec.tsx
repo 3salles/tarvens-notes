@@ -7,7 +7,6 @@ import userEvent from '@testing-library/user-event';
 
 const pushMock = jest.fn();
 let mockSearchParams = new URLSearchParams();
-let user: ReturnType<typeof userEvent.setup>;
 
 jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
