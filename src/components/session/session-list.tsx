@@ -4,6 +4,7 @@ import { SessionCard } from './session-card';
 export interface SessionListProps {
   sessions: ISessionSummary[];
 }
+//TODO - Adicionar atualização de lista ao remover
 export const SessionList = ({ sessions }: SessionListProps) => {
   return (
     <ul className="space-y-2">

@@ -2,7 +2,7 @@ import { PrismaClient } from '@/generated/prisma/client';
 import test, { expect } from '@playwright/test';
 import { PrismaPg } from '@prisma/adapter-pg';
 
-test('Edição de prompt via UI (sucesso)', async ({ page }) => {
+test('Session edition by UI (success)', async ({ page }) => {
   const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
   const prisma = new PrismaClient({ adapter });
 
