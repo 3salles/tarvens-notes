@@ -1,4 +1,5 @@
 'use client';
+import { deleteSessionAction } from '@/app/actions/session.actions';
 import { ISessionSummary } from '@/core/domain/sessions/session.entity';
 import { Trash as DeleteIcon, Loader2 as LoadingIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -24,8 +25,11 @@ export interface SessionCardProps {
 export const SessionCard = ({ session }: SessionCardProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleDeleteSession = () => {
-    toast.success('Sessão removida com sucesso!');
+  const handleDeleteSession = async () => {
+    setIsDeleting(true);
+    const result = await deleteSessionAction(session.id);
+    toast[result.success ? 'success' : 'error'](result.message);
+    setIsDeleting(false);
   };
 
   return (
@@ -53,8 +57,8 @@ export const SessionCard = ({ session }: SessionCardProps) => {
               <Button
                 variant="icon"
                 size="icon"
-                title="Remover sessão"
-                aria-label="Remover sessão"
+                title="Remover Sessão"
+                aria-label="Remover Sessão"
               >
                 <DeleteIcon className="w-3 h-3" />
               </Button>

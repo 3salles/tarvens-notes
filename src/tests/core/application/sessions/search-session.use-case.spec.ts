@@ -30,8 +30,10 @@ describe('SearchSessionUseCase', () => {
           session.title.toLowerCase().includes(term.toLocaleLowerCase()) ||
           session.note.toLowerCase().includes(term.toLocaleLowerCase())
       ),
-
     create: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+    findById: jest.fn(),
   };
 
   it('should return all sessions when term is empty', async () => {

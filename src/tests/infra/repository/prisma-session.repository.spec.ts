@@ -14,6 +14,7 @@ interface SessionDelegateMock {
       data: UpdateSessionDTO;
     }) => Promise<ISession>
   >;
+  delete: (args: { where: { id: string } }) => Promise<void>;
   findMany: jest.MockedFunction<
     (args: {
       orderBy?: { createdAt: 'asc' | 'desc' };
@@ -41,6 +42,7 @@ function createMockPrisma() {
       create: jest.fn(),
       update: jest.fn(),
       findUnique: jest.fn(),
+      delete: jest.fn(),
     },
   };
 
@@ -269,6 +271,17 @@ describe('PrismaSessionRepository', () => {
       const result = await repository.findById('1');
 
       expect(result).toBeNull();
+    });
+  });
+
+  describe('delete', () => {
+    it('should call prisma.session.delete with where id', async () => {
+      const sessionId = '1';
+      await repository.delete(sessionId);
+
+      expect(prisma.session.delete).toHaveBeenCalledWith({
+        where: { id: sessionId },
+      });
     });
   });
 });

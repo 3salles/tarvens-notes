@@ -16,6 +16,9 @@ describe('CreateSessionUseCase', () => {
     findMany: jest.fn(),
     searchMany: jest.fn(),
     create: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+    findById: jest.fn(),
   };
 
   const makeRepository = () => {

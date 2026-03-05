@@ -170,7 +170,7 @@ describe('Server Actions: Sessions', () => {
     });
 
     it('should throw error when session does not exist', async () => {
-      mockedUpdateExecute.mockRejectedValue(new Error('ERROR_NOT_FOUND'));
+      mockedUpdateExecute.mockRejectedValue(new Error('SESSION_NOT_FOUND'));
 
       const result = await updateSessionAction(data);
 

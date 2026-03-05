@@ -24,6 +24,12 @@ export class PrismaSessionRepository implements SessionRepository {
     return updated;
   }
 
+  async delete(id: string): Promise<void> {
+    await this.prisma.session.delete({
+      where: { id },
+    });
+  }
+
   async findMany(): Promise<ISession[]> {
     const sessions = await this.prisma.session.findMany({
       orderBy: { createdAt: 'desc' },

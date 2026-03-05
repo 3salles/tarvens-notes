@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import z from 'zod';
 
 import { CreateSessionUseCase } from '@/core/application/session/create-session.use-case';
+import { DeleteSessionUseCase } from '@/core/application/session/delete-session.use-case';
 import { SearchSessionUseCase } from '@/core/application/session/search-session.use-case';
 import {
   UpdateSessionDTO,
@@ -114,7 +115,7 @@ export async function updateSessionAction(
   } catch (error) {
     const _error = error as Error;
 
-    if (_error.message === 'ERROR_NOT_FOUND') {
+    if (_error.message === 'SESSION_NOT_FOUND') {
       return {
         success: false,
         message: 'Sessão não encontrada',
@@ -122,5 +123,29 @@ export async function updateSessionAction(
     }
 
     return { success: false, message: 'Falha ao atualizar sessão' };
+  }
+}
+
+export async function deleteSessionAction(id: string): Promise<FormState> {
+  if (!id) {
+    return { success: false, message: 'ID da sessão é obrigatório' };
+  }
+
+  try {
+    const repository = new PrismaSessionRepository(prisma);
+    const useCase = new DeleteSessionUseCase(repository);
+    await useCase.execute(id);
+
+    return { success: true, message: 'Sessão removida com sucesso!' };
+  } catch (error) {
+    const _error = error as Error;
+    if (_error.message === 'SESSION_NOT_FOUND') {
+      return {
+        success: false,
+        message: 'Sessão não encontrada',
+      };
+    }
+
+    return { success: false, message: 'Falha ao remover sessão' };
   }
 }
