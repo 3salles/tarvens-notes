@@ -1,36 +1,206 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <h3 align="center">Taverns&Notes</h3>
+</p>
 
-## Getting Started
+<p align="center">
+  Organize tabletop RPG campaigns, sessions and notes in one place.
+</p>
 
-First, run the development server:
+<p align="center">
+  <a href="https://taverns-notes.vercel.app/">Live Demo</a> •
+  <a href="#features">Features</a> •
+  <a href="#installation">Installation</a>
+</p>
+
+<p align="center">
+  <img src="docs/images/preview.png" width="900">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/repo-size/3salles/taverns-notes?style=for-the-badge">
+  <img src="https://img.shields.io/github/languages/count/3salles/taverns-notes?style=for-the-badge">
+  <img src="https://img.shields.io/github/issues/3salles/taverns-notes?style=for-the-badge">
+  <img src="https://img.shields.io/github/issues-pr/3salles/taverns-notes?style=for-the-badge">
+  <img src="https://img.shields.io/static/v1?label=License&message=MIT&color=blue&style=for-the-badge">
+</p>
+
+---
+
+## 📖 About The Project
+
+Taverns&Notes is a web application designed to help tabletop RPG groups organize their campaigns.
+
+Game Masters and players can register campaigns, store session notes and keep track of important information from their adventures.
+
+The goal of the project is to keep campaign history organized and prevent important details from getting lost between sessions.
+
+## 📚 Table of Contents
+
+- [📖 About The Project](#-about-the-project)
+- [📚 Table of Contents](#-table-of-contents)
+- [🖥 Usage](#-usage)
+- [⚙️ Features](#️-features)
+- [🖼 Screenshots](#-screenshots)
+- [🗺 Roadmap](#-roadmap)
+- [🧰 Technologies](#-technologies)
+- [🚀 Installation](#-installation)
+- [🧪 Running Tests](#-running-tests)
+- [📜 Available Scripts](#-available-scripts)
+- [📁 Project Structure](#-project-structure)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [👩‍💻 Author](#-author)
+
+## 🖥 Usage
+
+You can try the application here:
+
+https://taverns-notes.vercel.app/
+
+With taverns-notes you can:
+
+<!-- - Create RPG campaigns
+- Register campaign sessions -->
+
+- Write and organize session notes
+<!-- - Store important campaign information in one place -->
+
+The application helps groups keep their story and session history organized.
+
+## ⚙️ Features
+
+Current features:
+
+<!-- - Campaign creation -->
+<!-- - Session management -->
+
+- Session notes
+<!-- - Campaign organization -->
+
+## 🖼 Screenshots
+
+Screenshots of the application will be added here.
+
+### Sessions
+
+![Sessions](docs/images/sessions.png)
+
+## 🧰 Technologies
+
+Main technologies used in this project:
+
+- Next.js
+- React
+- TypeScript
+- Prisma
+- PostgreSQL
+- TailwindCSS
+- Radix UI
+- Zod
+- Playwright
+- Jest
+
+## 🗺 Roadmap
+
+Planned improvements for future versions:
+
+- [ ] Campaign creation
+- [x] Session notes
+- [ ] Authentication
+- [ ] Campaign sharing
+- [ ] Markdown support for notes
+- [ ] Export session notes
+- [ ] Mobile improvements
+
+## 🚀 Installation
+
+### Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/3salles/taverns-notes.git
+cd taverns-notes
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Run the project
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📜 Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command                 | Description              |
+| ----------------------- | ------------------------ |
+| pnpm dev                | Start development server |
+| pnpm build              | Build production version |
+| pnpm start              | Run production build     |
+| pnpm lint               | Run ESLint               |
+| pnpm test               | Run automated tests      |
+| pnpm prisma generate    | Generate Prisma client   |
+| pnpm prisma migrate dev | Run database migrations  |
 
-## Deploy on Vercel
+## 📁 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+taverns-notes
+│
+├─ docs
+│  ├─ architecture.md
+│  ├─ preview.png
+│  ├─ demo.gif
+│  └─ images
+│     ├─ campaigns.png
+│     └─ sessions.png
+│
+├─ prisma
+├─ src
+├─ tests
+│
+├─ .env.example
+├─ README.md
+├─ LICENSE
+└─ package.json
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a branch
+
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "add my feature"
+```
+
+4. Run tests before opening a PR
+
+```bash
+pnpm test
+```
+
+5. Push the branch
+
+```bash
+git push origin feature/my-feature
+```
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 👩‍💻 Author
+
+[Beatriz Salles](https://github.com/3salles)

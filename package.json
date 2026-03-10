@@ -1,6 +1,7 @@
 {
   "name": "taverns-notes",
   "version": "0.1.0",
+  "description": "A web app to organize tabletop RPG campaigns, sessions and notes for Game Masters and players.",
   "private": true,
   "scripts": {
     "dev": "next dev",
