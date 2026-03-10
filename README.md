@@ -1,202 +1,225 @@
 <p align="center">
-  <h3 align="center">Taverns&Notes</h3>
+  <img src="docs/images/sessions.png" alt="Taverns&Notes" width="600">
+</p>
+
+<h1 align="center">🎲 Taverns&Notes</h1>
+
+<p align="center">
+  <strong>Organize tabletop RPG campaigns, sessions, and notes — all in one place.</strong>
 </p>
 
 <p align="center">
-  Organize tabletop RPG campaigns, sessions and notes in one place.
+  <a href="https://taverns-notes.vercel.app/">Live Demo</a> ·
+  <a href="#-features">Features</a> ·
+  <a href="#-getting-started">Getting Started</a> ·
+  <a href="docs/architecture.md">Architecture</a> ·
+  <a href="#-roadmap">Roadmap</a>
 </p>
 
 <p align="center">
-  <a href="https://taverns-notes.vercel.app/">Live Demo</a> •
-  <a href="#features">Features</a> •
-  <a href="#installation">Installation</a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/github/repo-size/3salles/taverns-notes?style=for-the-badge">
-  <img src="https://img.shields.io/github/languages/count/3salles/taverns-notes?style=for-the-badge">
-  <img src="https://img.shields.io/github/issues/3salles/taverns-notes?style=for-the-badge">
-  <img src="https://img.shields.io/github/issues-pr/3salles/taverns-notes?style=for-the-badge">
-  <img src="https://img.shields.io/static/v1?label=License&message=MIT&color=blue&style=for-the-badge">
+  <img src="https://img.shields.io/github/actions/workflow/status/3salles/taverns-notes/ci.yml?branch=main&style=for-the-badge&label=CI" alt="CI Status">
+  <img src="https://img.shields.io/github/repo-size/3salles/taverns-notes?style=for-the-badge" alt="Repo Size">
+  <img src="https://img.shields.io/github/languages/count/3salles/taverns-notes?style=for-the-badge" alt="Languages">
+  <img src="https://img.shields.io/github/issues/3salles/taverns-notes?style=for-the-badge" alt="Issues">
+  <img src="https://img.shields.io/github/issues-pr/3salles/taverns-notes?style=for-the-badge" alt="PRs">
+  <img src="https://img.shields.io/static/v1?label=License&message=MIT&color=blue&style=for-the-badge" alt="License">
 </p>
 
 ---
 
-## 📖 About The Project
+## 📖 About
 
-Taverns&Notes is a web application designed to help tabletop RPG groups organize their campaigns.
+Taverns&Notes is a web application for tabletop RPG groups to organize their campaigns. Game Masters and players can register sessions, store notes, and keep track of every important detail from their adventures — so nothing gets lost between sessions.
 
-Game Masters and players can register campaigns, store session notes and keep track of important information from their adventures.
-
-The goal of the project is to keep campaign history organized and prevent important details from getting lost between sessions.
-
-## 📚 Table of Contents
-
-- [📖 About The Project](#-about-the-project)
-- [📚 Table of Contents](#-table-of-contents)
-- [🖥 Usage](#-usage)
-- [⚙️ Features](#️-features)
-- [🖼 Screenshots](#-screenshots)
-- [🗺 Roadmap](#-roadmap)
-- [🧰 Technologies](#-technologies)
-- [🚀 Installation](#-installation)
-- [🧪 Running Tests](#-running-tests)
-- [📜 Available Scripts](#-available-scripts)
-- [📁 Project Structure](#-project-structure)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [👩‍💻 Author](#-author)
-
-## 🖥 Usage
-
-You can try the application here:
-
-https://taverns-notes.vercel.app/
-
-With taverns-notes you can:
-
-<!-- - Create RPG campaigns
-- Register campaign sessions -->
-
-- Write and organize session notes
-<!-- - Store important campaign information in one place -->
-
-The application helps groups keep their story and session history organized.
+Built with **Next.js 16**, **Prisma**, and **PostgreSQL**, following **Clean Architecture** principles for maintainability and testability.
 
 ## ⚙️ Features
 
-Current features:
+- ✅ Create, edit, and delete sessions
+- ✅ Rich session notes
+- ✅ Search sessions by title or content
+- ✅ Responsive sidebar navigation
+- ✅ Copy session content
+- ✅ Toast notifications for user feedback
+- 🚧 Campaign creation and management _(coming soon)_
+- 🚧 User authentication _(coming soon)_
 
-<!-- - Campaign creation -->
-<!-- - Session management -->
-
-- Session notes
-<!-- - Campaign organization -->
-
-## 🖼 Screenshots
-
-Screenshots of the application will be added here.
+## 🖼️ Screenshots
 
 ### Sessions
 
 ![Sessions](docs/images/sessions.png)
 
-## 🧰 Technologies
+## 🧰 Tech Stack
 
-Main technologies used in this project:
+| Layer               | Technology                               |
+| ------------------- | ---------------------------------------- |
+| **Framework**       | Next.js 16 (App Router + Server Actions) |
+| **Language**        | TypeScript                               |
+| **Database**        | PostgreSQL + Prisma ORM                  |
+| **Styling**         | Tailwind CSS 4 + Radix UI                |
+| **Forms**           | React Hook Form + Zod                    |
+| **Testing**         | Jest (unit) + Playwright (E2E)           |
+| **CI/CD**           | GitHub Actions                           |
+| **Deploy**          | Vercel                                   |
+| **Package Manager** | pnpm                                     |
 
-- Next.js
-- React
-- TypeScript
-- Prisma
-- PostgreSQL
-- TailwindCSS
-- Radix UI
-- Zod
-- Playwright
-- Jest
+## 🚀 Getting Started
 
-## 🗺 Roadmap
+### Prerequisites
 
-Planned improvements for future versions:
+- **Node.js** ≥ 22
+- **pnpm** ≥ 9
+- **Docker** (for local PostgreSQL)
 
-- [ ] Campaign creation
-- [x] Session notes
-- [ ] Authentication
-- [ ] Campaign sharing
-- [ ] Markdown support for notes
-- [ ] Export session notes
-- [ ] Mobile improvements
-
-## 🚀 Installation
-
-### Clone the repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/3salles/taverns-notes.git
 cd taverns-notes
 ```
 
-### Install dependencies
+### 2. Set up environment variables
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your database URL if needed. The default works with the Docker Compose setup.
+
+### 3. Start the database
+
+```bash
+docker compose up -d
+```
+
+### 4. Install dependencies and set up the database
 
 ```bash
 pnpm install
+pnpm db:generate
+pnpm db:migrate
 ```
 
-### Run the project
+### 5. (Optional) Seed sample data
+
+```bash
+pnpm db:seed
+```
+
+### 6. Start the development server
 
 ```bash
 pnpm dev
 ```
 
-http://localhost:3000
+Open [http://localhost:3000](http://localhost:3000).
 
 ## 📜 Available Scripts
 
-| Command                 | Description              |
-| ----------------------- | ------------------------ |
-| pnpm dev                | Start development server |
-| pnpm build              | Build production version |
-| pnpm start              | Run production build     |
-| pnpm lint               | Run ESLint               |
-| pnpm test               | Run automated tests      |
-| pnpm prisma generate    | Generate Prisma client   |
-| pnpm prisma migrate dev | Run database migrations  |
+| Command              | Description                    |
+| -------------------- | ------------------------------ |
+| `pnpm dev`           | Start development server       |
+| `pnpm build`         | Build for production           |
+| `pnpm start`         | Run production build           |
+| `pnpm lint`          | Run ESLint                     |
+| `pnpm typecheck`     | Run TypeScript type checking   |
+| `pnpm test`          | Run unit tests                 |
+| `pnpm test:watch`    | Run tests in watch mode        |
+| `pnpm test:coverage` | Run tests with coverage report |
+| `pnpm test:e2e`      | Run Playwright E2E tests       |
+| `pnpm test:e2e:ui`   | Run E2E tests with UI mode     |
+| `pnpm db:generate`   | Generate Prisma client         |
+| `pnpm db:migrate`    | Run database migrations        |
+| `pnpm db:seed`       | Seed the database              |
 
 ## 📁 Project Structure
 
-```bash
-taverns-notes
-│
-├─ docs
-│  ├─ architecture.md
-│  ├─ preview.png
-│  ├─ demo.gif
-│  └─ images
-│     ├─ campaigns.png
-│     └─ sessions.png
-│
-├─ prisma
-├─ src
-├─ tests
-│
-├─ .env.example
-├─ README.md
-├─ LICENSE
+```
+taverns-notes/
+├─ .github/workflows/     # CI pipeline
+├─ docs/                   # Documentation & images
+│  └─ architecture.md      # Detailed architecture docs
+├─ e2e/                    # Playwright E2E tests
+├─ prisma/                 # Database schema & migrations
+├─ public/                 # Static assets
+├─ src/
+│  ├─ app/                 # Next.js App Router (pages + server actions)
+│  ├─ components/          # Reusable UI components
+│  ├─ core/                # Business logic (Clean Architecture)
+│  │  ├─ application/      # Use cases & DTOs
+│  │  └─ domain/           # Entities & repository contracts
+│  ├─ infra/               # Infrastructure implementations
+│  ├─ lib/                 # Shared utilities
+│  ├─ styles/              # Global styles
+│  └─ tests/               # Unit & component tests
+├─ docker-compose.yml      # Local PostgreSQL
 └─ package.json
 ```
 
+> 📐 For a deep dive into the architecture, layers, and technical decisions, check the **[Architecture Documentation](docs/architecture.md)**.
+
+## 🗺️ Roadmap
+
+### Phase 1 — Foundation ✅
+
+- [x] Session CRUD (create, read, update, delete)
+- [x] Session search
+- [x] Responsive layout with sidebar
+- [x] CI pipeline (lint, typecheck, tests, build)
+- [x] E2E tests with Playwright
+- [x] Clean Architecture with use cases
+
+### Phase 2 — Core Features 🚧
+
+- [ ] User authentication (NextAuth.js / Clerk)
+- [ ] Campaign creation and management
+- [ ] Associate sessions with campaigns
+- [ ] Markdown support for notes (MDX editor)
+- [ ] Rich text editor
+
+### Phase 3 — Collaboration 🔮
+
+- [ ] Campaign sharing between users
+- [ ] Role-based access (Game Master / Player)
+- [ ] Real-time collaborative editing
+- [ ] Comments on sessions
+
+### Phase 4 — Polish & Scale 🚀
+
+- [ ] Export session notes (PDF / Markdown)
+- [ ] Mobile-first improvements (PWA)
+- [ ] Dark/Light theme toggle
+- [ ] Notification system
+- [ ] API rate limiting
+- [ ] Analytics dashboard
+
 ## 🤝 Contributing
 
+Contributions are welcome! Please read the [Contributing Guide](CONTRIBUTING.md) before submitting a PR.
+
 1. Fork the repository
-2. Create a branch
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-```bash
-git checkout -b feature/my-feature
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "add my feature"
-```
-
-4. Run tests before opening a PR
-
-```bash
-pnpm test
-```
-
-5. Push the branch
-
-```bash
-git push origin feature/my-feature
-```
+Please ensure your PR passes all CI checks (lint, typecheck, tests, build).
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+## 🔒 Security
+
+If you discover a security vulnerability, please see our [Security Policy](SECURITY.md).
 
 ## 👩‍💻 Author
 
-[Beatriz Salles](https://github.com/3salles)
+Made with ❤️ by [Beatriz Salles](https://github.com/3salles)
+
+---
+
+<p align="center">
+  <sub>If this project helped you, consider giving it a ⭐</sub>
+</p>
