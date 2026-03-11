@@ -1,5 +1,6 @@
 'use client';
 
+import { TomeScene } from '@/components/animations';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -8,7 +9,7 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form';
-import { BookIcon, GoogleIcon, OpenTome } from '@/components/ui/icons';
+import { BookIcon, GoogleIcon } from '@/components/ui/icons';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { motion } from 'motion/react';
@@ -41,18 +42,7 @@ export default function Auth() {
             </span>
           </motion.div>
 
-          {/* scene */}
-          <motion.div
-            className="relative flex h-85 w-85 items-center justify-center"
-            animate={{ y: [0, -10, 0] }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          >
-            <OpenTome />
-          </motion.div>
+          <TomeScene />
 
           {/* quote */}
           <div className="absolute bottom-12 left-0 right-0 px-12 text-center animate-fade-up">
