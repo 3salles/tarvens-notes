@@ -2,13 +2,13 @@
 
 import { Trash as DeleteIcon, Loader2 as LoadingIcon } from 'lucide-react';
 import { motion } from 'motion/react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { deleteSessionAction } from '@/app/actions/session.actions';
 import { SessionSummary } from '@/core/domain/sessions/session.entity';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import {
   AlertDialog,
   AlertDialogAction,

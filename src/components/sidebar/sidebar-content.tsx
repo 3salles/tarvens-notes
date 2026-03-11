@@ -8,7 +8,7 @@ import {
   Menu,
 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useQueryState } from 'nuqs';
 import {
   startTransition,

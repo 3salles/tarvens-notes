@@ -1,11 +1,14 @@
+import { Link } from '@/i18n/navigation';
 import { motion } from 'motion/react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form';
 import { Input } from '../ui/input';
 
 export const LoginForm = () => {
+  const t = useTranslations('authForm');
+
   const loginForm = useForm({
     defaultValues: {
       email: '',
@@ -28,7 +31,7 @@ export const LoginForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('email')}</FormLabel>
                 <FormControl>
                   <Input
                     size="lg"
@@ -43,7 +46,7 @@ export const LoginForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Senha</FormLabel>
+                <FormLabel>{t('password')}</FormLabel>
                 <FormControl>
                   <Input
                     size="lg"
@@ -58,7 +61,7 @@ export const LoginForm = () => {
                     className="text-sm text-white hover:text-ember 
                               transition-colors"
                   >
-                    Esqueceu a senha?
+                    {t('forgotPassword')}
                   </Link>
                 </div>
               </FormItem>
@@ -72,7 +75,7 @@ export const LoginForm = () => {
                         h-12 mt-4"
               size="lg"
             >
-              Entrar na campanha
+              {t('enter')}
             </Button>
           </motion.div>
         </form>

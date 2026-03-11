@@ -78,7 +78,7 @@ export async function createSessionAction(
     const useCase = new CreateSessionUseCase(repository);
 
     await useCase.execute(validated.data);
-    revalidatePath('/', 'layout');
+    revalidatePath('/[locale]', 'layout');
   } catch {
     return { success: false, message: 'Falha ao criar sessão' };
   }
@@ -107,7 +107,7 @@ export async function updateSessionAction(
     const repository = new PrismaSessionRepository(prisma);
     const useCase = new UpdateSessionUseCase(repository);
     await useCase.execute(validated.data);
-    revalidatePath('/', 'layout');
+    revalidatePath('/[locale]', 'layout');
 
     return {
       success: true,
@@ -134,7 +134,7 @@ export async function deleteSessionAction(id: string): Promise<FormState> {
     const repository = new PrismaSessionRepository(prisma);
     const useCase = new DeleteSessionUseCase(repository);
     await useCase.execute(id);
-    revalidatePath('/', 'layout');
+    revalidatePath('/[locale]', 'layout');
 
     return { success: true, message: 'Sessão removida com sucesso!' };
   } catch (error) {

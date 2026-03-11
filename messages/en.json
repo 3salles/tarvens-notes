@@ -1,0 +1,49 @@
+{
+  "auth": {
+    "title": "Welcome back,",
+    "subtitle": "Adventurer!",
+    "description": "Sign in to continue your campaign",
+    "tabs": {
+      "login": "Sign in",
+      "signup": "Create account"
+    },
+    "or": "or",
+    "googleButton": {
+      "login": "Continue with Google",
+      "signup": "Sign up with Google"
+    }
+  },
+  "authForm": {
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "enter": "Enter the campaign",
+    "registerSubmit": "Create account",
+    "nameLabel": "Your name",
+    "namePlaceholder": "What should we call you?"
+  },
+  "sidebar": {
+    "newSession": "New session",
+    "searchPlaceholder": "Search sessions...",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "expandSidebar": "Expand sidebar",
+    "minimizeSidebar": "Minimize sidebar",
+    "loadingSessions": "Loading sessions"
+  },
+  "sessionCard": {
+    "removeSession": "Remove Session",
+    "removeConfirmTitle": "Remove Session",
+    "removeConfirmDescription": "Are you sure you want to remove this session? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Remove"
+  },
+  "home": {
+    "selectSession": "Select a session",
+    "selectSessionDescription": "Choose a session from the list to view and edit"
+  },
+  "tabHero": {
+    "quote": "Every great campaign begins with a single note written in the dark.",
+    "author": "— The Game Master's Creed"
+  }
+}

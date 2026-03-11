@@ -4,9 +4,12 @@ import { AuthHero, LoginForm, RegisterForm } from '@/components/auth';
 import { GoogleIcon } from '@/components/ui/icons';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export default function Auth() {
+  const t = useTranslations('auth');
+
   const [tab, setTab] = useState<'login' | 'signup'>('login');
 
   return (
@@ -26,13 +29,11 @@ export default function Auth() {
         <div className="w-full max-w-lg animate-fade-up px-8">
           <header>
             <h1 className="font-display text-3xl font-bold leading-tight mb-1">
-              Bem-vindo de volta,
+              {t('title')}
               <br />
-              <em className="text-text-muted italic">Aventureiro!</em>
+              <em className="text-text-muted italic">{t('subtitle')}</em>
             </h1>
-            <p className="mb-8 text-base text-text-dim">
-              Entre para continuar sua campanha
-            </p>
+            <p className="mb-8 text-base text-text-dim">{t('description')}</p>
           </header>
 
           <Tabs
@@ -43,8 +44,8 @@ export default function Auth() {
               variant="line"
               className="mb-7 w-full border-b border-border"
             >
-              <TabsTrigger value="login">Entrar</TabsTrigger>
-              <TabsTrigger value="signup">Criar conta</TabsTrigger>
+              <TabsTrigger value="login"> {t(`tabs.login`)}</TabsTrigger>
+              <TabsTrigger value="signup"> {t(`tabs.signup`)}</TabsTrigger>
             </TabsList>
 
             <motion.div layout className="relative min-h-75">
@@ -55,11 +56,11 @@ export default function Auth() {
           </Tabs>
 
           <div
-            className="my-5 flex items-center gap-3 text-sm tracking-[0.08em] 
+            className="my-5 flex items-center gap-3 text-sm tracking-[0.08em]
           text-text-muted"
           >
             <div className="h-px flex-1 bg-border" />
-            ou
+            {t('or')}
             <div className="h-px flex-1 bg-border" />
           </div>
 
@@ -69,7 +70,7 @@ export default function Auth() {
               transition-colors hover:border-text-dim hover:text-text cursor-pointer"
           >
             <GoogleIcon />
-            {tab === 'login' ? 'Continuar com Google' : 'Cadastrar com Google'}
+            {t(`googleButton.${tab}`)}
           </button>
         </div>
       </div>

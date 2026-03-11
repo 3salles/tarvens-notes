@@ -1,0 +1,49 @@
+{
+  "auth": {
+    "title": "Bem-vindo de volta,",
+    "subtitle": "Aventureiro!",
+    "description": "Entre para continuar sua campanha",
+    "tabs": {
+      "login": "Entrar",
+      "signup": "Criar conta"
+    },
+    "or": "ou",
+    "googleButton": {
+      "login": "Continuar com Google",
+      "signup": "Cadastrar com Google"
+    }
+  },
+  "authForm": {
+    "email": "Email",
+    "password": "Senha",
+    "forgotPassword": "Esqueceu a senha?",
+    "enter": "Entrar na campanha",
+    "registerSubmit": "Criar conta",
+    "nameLabel": "Seu nome",
+    "namePlaceholder": "Como te chamamos?"
+  },
+  "sidebar": {
+    "newSession": "Nova sessão",
+    "searchPlaceholder": "Buscar sessões...",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "expandSidebar": "Expandir sidebar",
+    "minimizeSidebar": "Minimizar sidebar",
+    "loadingSessions": "Carregando sessões"
+  },
+  "sessionCard": {
+    "removeSession": "Remover Sessão",
+    "removeConfirmTitle": "Remover Sessão",
+    "removeConfirmDescription": "Tem certeza que deseja remover esta sessão? Esta ação não pode ser desfeita.",
+    "cancel": "Cancelar",
+    "confirm": "Remover"
+  },
+  "home": {
+    "selectSession": "Selecione uma sessão",
+    "selectSessionDescription": "Escolha uma sessão da lista ao lado para visualizar e editar"
+  },
+  "tabHero": {
+    "quote": "Every great campaign begins with a single note written in the dark.",
+    "author": "— The Game Master's Creed"
+  }
+}

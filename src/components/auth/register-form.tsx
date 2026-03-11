@@ -1,10 +1,13 @@
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form';
 import { Input } from '../ui/input';
 
 export const RegisterForm = () => {
+  const t = useTranslations('authForm');
+
   const registerForm = useForm({
     defaultValues: {
       name: '',
@@ -12,6 +15,7 @@ export const RegisterForm = () => {
       password: '',
     },
   });
+
   return (
     <motion.div
       key="signup"
@@ -27,10 +31,14 @@ export const RegisterForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Seu nome</FormLabel>
+                <FormLabel>{t('nameLabel')}</FormLabel>
 
                 <FormControl>
-                  <Input size="lg" placeholder="Como te chamamos?" {...field} />
+                  <Input
+                    size="lg"
+                    placeholder={t('namePlaceholder')}
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -41,7 +49,7 @@ export const RegisterForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('email')}</FormLabel>
 
                 <FormControl>
                   <Input
@@ -59,7 +67,7 @@ export const RegisterForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Senha</FormLabel>
+                <FormLabel>{t('password')}</FormLabel>
 
                 <FormControl>
                   <Input
@@ -80,7 +88,7 @@ export const RegisterForm = () => {
                         h-12"
               size="lg"
             >
-              Criar conta
+              {t('registerSubmit')}
             </Button>
           </motion.div>
         </form>

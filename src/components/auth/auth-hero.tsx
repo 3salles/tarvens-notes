@@ -1,8 +1,11 @@
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { TomeScene } from '../animations';
 import { Logo } from '../logo';
 
 export const AuthHero = ({ tab }: { tab: string }) => {
+  const t = useTranslations('tabHero');
+
   return (
     <div className="relative flex basis-[55%] items-center justify-center overflow-hidden">
       <div
@@ -31,11 +34,11 @@ export const AuthHero = ({ tab }: { tab: string }) => {
             className="mx-auto mb-1 max-w-115 font-display italic font-semibold 
           leading-relaxed text-xl tracking-wide text-text"
           >
-            Every great campaign begins with a single note written in the dark.
+            {t('quote')}
           </p>
 
           <cite className="font-body text-sm uppercase  not-italic text-text-muted">
-            {"— The Game Master's Creed"}
+            {t('author')}
           </cite>
         </div>
       </div>

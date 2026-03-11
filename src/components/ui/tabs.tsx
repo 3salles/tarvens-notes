@@ -65,7 +65,7 @@ function TabsTrigger({
       data-slot="tabs-trigger"
       className={cn(
         // Base styles
-        'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-all',
+        'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-all cursor-pointer',
         // Text color: muted by default, full on hover
         'text-text-muted hover:text-text',
         // Vertical orientation
