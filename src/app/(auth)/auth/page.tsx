@@ -8,8 +8,11 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form';
+import { GoogleIcon, OpenTome } from '@/components/ui/icons';
+
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { BookIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
@@ -25,7 +28,32 @@ export default function Auth() {
   return (
     <section className="flex h-screen w-full bg-ink text-text font-body overflow-hidden">
       <div className="relative flex basis-[55%] items-center justify-center overflow-hidden">
-        Left panel Illustration
+        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center p-12">
+          {/* brand */}
+          <div className="absolute left-10 top-10 flex items-center gap-2 animate-fade-up">
+            <BookIcon />
+            <span className="font-display text-[1.05rem] font-bold">
+              Taverns & Notes
+            </span>
+          </div>
+
+          {/* scene */}
+          <div className="relative flex h-85 w-85 items-center justify-center">
+            <OpenTome />
+          </div>
+
+          {/* quote */}
+          <div className="absolute bottom-12 left-0 right-0 px-12 text-center animate-fade-up">
+            <p className="mx-auto mb-1 max-w-85 font-display italic text-text-dim leading-relaxed">
+              Every great campaign begins with a single note written in the
+              dark.
+            </p>
+
+            <cite className="font-body text-[0.7rem] uppercase tracking-[0.12em] text-text-muted not-italic">
+              The Game Master`&rsquo`s Creed
+            </cite>
+          </div>
+        </div>
       </div>
       <div className="basis-px bg-linear-to-b from-transparent via-border-strong to-transparent" />
       <div className="relative flex flex-1 items-center justify-center bg-surface overflow-hidden">
@@ -77,7 +105,8 @@ export default function Auth() {
 
                         <Link
                           href="/forgot-password"
-                          className="text-right text-xs text-text-muted hover:text-ember-lite transition-colors"
+                          className="text-text-muted hover:text-ember 
+                          hover:underline underline-offset-4 transition-colors"
                         >
                           Esqueceu a senha?
                         </Link>
@@ -176,6 +205,7 @@ export default function Auth() {
         border border-border-strong py-2.5 text-[0.85rem] text-text-dim
         transition-colors hover:border-text-dim hover:text-text"
           >
+            <GoogleIcon />
             Continuar com Google
           </button>
         </div>
