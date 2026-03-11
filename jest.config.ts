@@ -6,6 +6,9 @@ const config = createJestConfig({
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
+    '^next-intl/navigation$':
+      '<rootDir>/src/__mocks__/next-intl-navigation.tsx',
+    '^next-intl/routing$': '<rootDir>/src/__mocks__/next-intl-routing.ts',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transformIgnorePatterns: [

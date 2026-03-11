@@ -10,8 +10,17 @@ const pushMock = jest.fn();
 const setQueryMock = jest.fn();
 let mockSearchParams = new URLSearchParams();
 
-jest.mock('next/navigation', () => ({
+jest.mock('@/i18n/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
+  Link: ({
+    href,
+    children,
+    ...props
+  }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  ),
 }));
 
 jest.mock('nuqs', () => ({
