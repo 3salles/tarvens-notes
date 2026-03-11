@@ -56,14 +56,14 @@ export default function Auth() {
 
           <TomeScene trigger={tab} />
 
-          <div className="w-full max-w-90 px-8 py-6 animate-fade-up">
-            <p className="mx-auto mb-1 max-w-85 font-display italic text-text-dim leading-relaxed">
+          <div className="w-full max-w-120 px-8 py-6 animate-fade-up">
+            <p className="mx-auto mb-1 max-w-115 font-display italic font-semibold leading-relaxed text-xl tracking-wide text-text">
               Every great campaign begins with a single note written in the
               dark.
             </p>
 
-            <cite className="font-body text-[0.7rem] uppercase tracking-[0.12em] text-text-muted not-italic">
-              {"The Game Master's Creed"}
+            <cite className="font-body text-sm uppercase  not-italic text-text-muted">
+              {"— The Game Master's Creed"}
             </cite>
           </div>
         </div>
