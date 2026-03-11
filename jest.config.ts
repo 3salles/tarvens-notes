@@ -4,8 +4,6 @@ const config = createJestConfig({
   dir: './',
 })({
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  transform: {},
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',

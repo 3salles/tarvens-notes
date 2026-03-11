@@ -1,7 +1,6 @@
-import { Sidebar } from '@/components/sidebar';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Lora, Playfair_Display } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from 'sonner';
 
@@ -11,10 +10,18 @@ export const metadata: Metadata = {
     'Um espaço para registrar sessões de RPG, organizar anotações e acompanhar a evolução da sua campanha.',
 };
 
-const inter = Inter({
-  variable: '--font-sans',
+const playfair = Playfair_Display({
+  variable: '--font-display',
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['400', '700', '900'],
+  style: ['normal', 'italic'],
+});
+
+const lora = Lora({
+  variable: '--font-body',
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
 });
 
 export default function RootLayout({
@@ -25,16 +32,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body
-        className={`${inter.variable} antialiased bg-gray-900 
+        className={`${playfair.variable} ${lora.variable} antialiased bg-ink
       text-white flex h-screen`}
       >
         <NuqsAdapter>
-          <Sidebar />
-          <main className="relative flex-1 overflow-auto min-w-0">
-            <div className="p-4 sm:p-6 md:p-8 max-w-full md:max-w-3xl mx-auto h-full">
-              {children}
-            </div>
-          </main>
+          {children}
           <Toaster position="top-right" />
         </NuqsAdapter>
       </body>
