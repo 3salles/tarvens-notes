@@ -11,12 +11,15 @@ import {
 } from '@/components/ui/form';
 import { BookIcon, GoogleIcon } from '@/components/ui/icons';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { motion } from 'motion/react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function Auth() {
+  const [tab, setTab] = useState<'login' | 'signup'>('login');
+
   const loginForm = useForm({
     defaultValues: {
       name: '',
@@ -88,7 +91,10 @@ export default function Auth() {
             </p>
           </header>
 
-          <Tabs defaultValue="login">
+          <Tabs
+            value={tab}
+            onValueChange={(tab) => setTab(tab as 'login' | 'signup')}
+          >
             <TabsList
               variant="line"
               className="mb-7 w-full border-b border-border"
@@ -97,7 +103,158 @@ export default function Auth() {
               <TabsTrigger value="signup">Criar conta</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="login">
+            <motion.div layout className="relative min-h-75">
+              <AnimatePresence mode="wait">
+                {tab === 'login' && (
+                  <motion.div
+                    key="login"
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -18 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                  >
+                    <Form {...loginForm}>
+                      <form className="space-y-4">
+                        <FormField
+                          control={loginForm.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Email</FormLabel>
+                              <FormControl>
+                                <Input
+                                  size="lg"
+                                  placeholder="mestre@taverna.com"
+                                  {...field}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          name="password"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Senha</FormLabel>
+                              <FormControl>
+                                <Input
+                                  size="lg"
+                                  type="password"
+                                  placeholder="••••••••"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <div className="flex justify-end">
+                                <Link
+                                  href="/forgot-password"
+                                  className="text-sm text-white hover:text-ember 
+                              transition-colors"
+                                >
+                                  Esqueceu a senha?
+                                </Link>
+                              </div>
+                            </FormItem>
+                          )}
+                        />
+
+                        <motion.div whileTap={{ scale: 0.97 }}>
+                          <Button
+                            type="submit"
+                            className="w-full bg-ember hover:bg-ember-lite text-base 
+                        h-12 mt-4"
+                            size="lg"
+                          >
+                            Entrar na campanha
+                          </Button>
+                        </motion.div>
+                      </form>
+                    </Form>
+                  </motion.div>
+                )}
+
+                {tab === 'signup' && (
+                  <motion.div
+                    key="signup"
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -18 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                  >
+                    <Form {...loginForm}>
+                      <form className="space-y-4">
+                        <FormField
+                          control={loginForm.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Seu nome</FormLabel>
+
+                              <FormControl>
+                                <Input
+                                  size="lg"
+                                  placeholder="Como te chamamos?"
+                                  {...field}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={loginForm.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Email</FormLabel>
+
+                              <FormControl>
+                                <Input
+                                  size="lg"
+                                  placeholder="mestre@taverna.com"
+                                  {...field}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={loginForm.control}
+                          name="password"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Senha</FormLabel>
+
+                              <FormControl>
+                                <Input
+                                  size="lg"
+                                  type="password"
+                                  placeholder="••••••••"
+                                  {...field}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+
+                        <motion.div whileTap={{ scale: 0.97 }}>
+                          <Button
+                            type="submit"
+                            className="w-full bg-ember hover:bg-ember-lite text-base 
+                        h-12"
+                            size="lg"
+                          >
+                            Criar conta
+                          </Button>
+                        </motion.div>
+                      </form>
+                    </Form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* <TabsContent value="login">
               <motion.div
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -239,7 +396,7 @@ export default function Auth() {
                   </form>
                 </Form>
               </motion.div>
-            </TabsContent>
+            </TabsContent> */}
           </Tabs>
 
           <div
