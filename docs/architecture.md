@@ -39,21 +39,41 @@ Implements the repository interfaces using concrete technologies (Prisma). This 
 ## 📁 Project Structure
 
 ```
+messages/                        # i18n translation files
+├─ en.json
+└─ pt.json
+
 src/
 ├─ app/                          # Next.js App Router
 │  ├─ actions/                   # Server Actions (controllers)
 │  │  └─ session.actions.ts
-│  ├─ [id]/page.tsx              # Session detail page
-│  ├─ new-session/page.tsx       # New session page
-│  ├─ layout.tsx                 # Root layout
-│  └─ page.tsx                   # Home page
+│  ├─ [locale]/                  # Locale-prefixed routes (pt/en)
+│  │  ├─ (auth)/                 # Auth route group
+│  │  │  ├─ auth/page.tsx        # Login / Register page
+│  │  │  └─ layout.tsx
+│  │  ├─ [id]/page.tsx           # Session detail page
+│  │  ├─ new-session/page.tsx    # New session page
+│  │  ├─ layout.tsx              # Locale layout
+│  │  └─ page.tsx                # Home page
+│  └─ layout.tsx                 # Root layout
 │
 ├─ components/                   # Reusable UI components
 │  ├─ ui/                        # Base components (Button, Input, Form...)
+│  ├─ animations/                # Animated scenes (TomeBurst, TomeFlash...)
+│  ├─ effects/                   # Visual effects (PulseRings, TomeSparks...)
+│  ├─ auth/                      # Auth UI (AuthHero, LoginForm, RegisterForm)
 │  ├─ sidebar/                   # Navigation sidebar
 │  ├─ session/                   # Session-specific components
 │  ├─ logo/                      # Branding
 │  └─ button-actions/            # Action buttons (Copy, etc.)
+│
+├─ i18n/                         # Internationalization setup (next-intl)
+│  ├─ routing.ts                 # Locale routing config (locales, defaultLocale)
+│  ├─ navigation.ts              # Typed navigation helpers
+│  ├─ request.ts                 # Per-request i18n config
+│  └─ index.ts
+│
+├─ middleware.ts                  # next-intl locale routing middleware
 │
 ├─ core/                         # Business logic (framework-agnostic)
 │  ├─ application/session/       # Use cases & DTOs
@@ -124,6 +144,7 @@ Note
 | **PostgreSQL**         | Reliable relational database, great for structured campaign data                |
 | **Server Actions**     | Eliminates need for separate API routes; co-located with UI                     |
 | **Zod**                | Runtime validation with TypeScript type inference for DTOs                      |
+| **next-intl**          | Type-safe i18n with locale-prefixed routing; default locale `pt`, supports `en` |
 | **pnpm**               | Fast, disk-efficient package manager with strict dependency resolution          |
 
 ## 🧪 Testing Strategy
@@ -153,5 +174,6 @@ The project uses a multi-layered testing approach:
 | `sonner`                          | Toast notifications                     |
 | `lucide-react`                    | Icons                                   |
 | `motion`                          | Animations                              |
+| `next-intl`                       | Internationalization (i18n routing)     |
 | `radix-ui`                        | Accessible UI primitives                |
 | `tailwind-merge` + `clsx` + `cva` | Styling utilities                       |

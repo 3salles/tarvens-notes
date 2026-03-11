@@ -41,6 +41,7 @@ Built with **Next.js 16**, **Prisma**, and **PostgreSQL**, following **Clean Arc
 - ✅ Responsive sidebar navigation
 - ✅ Copy session content
 - ✅ Toast notifications for user feedback
+- ✅ Multi-language support (Portuguese and English)
 - 🚧 Campaign creation and management _(coming soon)_
 - 🚧 User authentication _(coming soon)_
 
@@ -59,6 +60,7 @@ Built with **Next.js 16**, **Prisma**, and **PostgreSQL**, following **Clean Arc
 | **Database**        | PostgreSQL + Prisma ORM                  |
 | **Styling**         | Tailwind CSS 4 + Radix UI                |
 | **Forms**           | React Hook Form + Zod                    |
+| **i18n**            | next-intl (pt / en)                      |
 | **Testing**         | Jest (unit) + Playwright (E2E)           |
 | **CI/CD**           | GitHub Actions                           |
 | **Deploy**          | Vercel                                   |
@@ -141,16 +143,20 @@ taverns-notes/
 ├─ docs/                   # Documentation & images
 │  └─ architecture.md      # Detailed architecture docs
 ├─ e2e/                    # Playwright E2E tests
+├─ messages/               # i18n translation files (pt.json, en.json)
 ├─ prisma/                 # Database schema & migrations
 ├─ public/                 # Static assets
 ├─ src/
 │  ├─ app/                 # Next.js App Router (pages + server actions)
+│  │  └─ [locale]/         # Locale-prefixed routes (pt / en)
 │  ├─ components/          # Reusable UI components
 │  ├─ core/                # Business logic (Clean Architecture)
 │  │  ├─ application/      # Use cases & DTOs
 │  │  └─ domain/           # Entities & repository contracts
+│  ├─ i18n/                # next-intl routing & request config
 │  ├─ infra/               # Infrastructure implementations
 │  ├─ lib/                 # Shared utilities
+│  ├─ middleware.ts         # Locale routing middleware
 │  ├─ styles/              # Global styles
 │  └─ tests/               # Unit & component tests
 ├─ docker-compose.yml      # Local PostgreSQL
