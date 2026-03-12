@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/sessions.png" alt="Taverns&Notes" width="600">
+  <img src="docs/images/preview.png" alt="Taverns&Notes" width="600">
 </p>
 
 <h1 align="center">🎲 Taverns&Notes</h1>
