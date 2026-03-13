@@ -1,3 +1,5 @@
+import { createUserSchema } from '@/core/application/auth/create-user.dto';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
@@ -9,12 +11,15 @@ export const RegisterForm = () => {
   const t = useTranslations('authForm');
 
   const registerForm = useForm({
+    resolver: zodResolver(createUserSchema),
     defaultValues: {
       name: '',
       email: '',
       password: '',
     },
   });
+
+  const { isValid } = registerForm.formState;
 
   return (
     <motion.div
@@ -87,6 +92,7 @@ export const RegisterForm = () => {
               className="w-full bg-ember hover:bg-ember-lite text-base 
                         h-12"
               size="lg"
+              disabled={!isValid}
             >
               {t('registerSubmit')}
             </Button>

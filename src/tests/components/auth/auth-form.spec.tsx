@@ -1,6 +1,6 @@
+import Auth from '@/app/[locale]/(auth)/auth/page';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Auth from '@/app/[locale]/(auth)/auth/page';
 
 jest.mock('next-intl', () => ({
   useTranslations: (namespace: string) => {
@@ -213,6 +213,35 @@ describe('AuthPage', () => {
       expect(
         screen.getByRole('button', { name: /cadastrar com google/i })
       ).toBeVisible();
+    });
+  });
+
+  describe('Signup form submission', () => {
+    const user = userEvent.setup();
+
+    const renderAndSwitchToSignup = async () => {
+      makeSut();
+      await user.click(screen.getByRole('tab', { name: 'Criar conta' }));
+    };
+
+    it('should disable submit button when fields are empty', async () => {
+      await renderAndSwitchToSignup();
+
+      expect(
+        screen.getByRole('button', { name: /criar conta/i })
+      ).toBeDisabled();
+    });
+
+    it('should enable submit button when all fields  are filled', async () => {
+      await renderAndSwitchToSignup();
+
+      await user.type(screen.getByLabelText(/seu nome/i), 'Gandalf');
+      await user.type(screen.getByLabelText(/email/i), 'gandalf@taverna.com');
+      await user.type(screen.getByLabelText(/senha/i), '12345678');
+
+      expect(
+        screen.getByRole('button', { name: /criar conta/i })
+      ).toBeEnabled();
     });
   });
 });
